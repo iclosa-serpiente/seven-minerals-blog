@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iclosa-serpiente.github.io/seven-minerals-blog/sitemap.xml
