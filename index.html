@@ -15,8 +15,19 @@
 <body>
   <h1>Seven Minerals Blog</h1>
   <p>Health insights and magnesium education.</p>
-  <div id="posts">
-    <p>Posts coming soon.</p>
-  </div>
+  <div id="posts"><p>Loading posts...</p></div>
+  <script>
+    fetch('https://api.github.com/repos/iclosa-serpiente/seven-minerals-blog/contents/tests')
+      .then(r => r.json())
+      .then(files => {
+        const posts = files.filter(f => f.name.endsWith('.html'));
+        const div = document.getElementById('posts');
+        if (!posts.length) { div.innerHTML = '<p>No posts yet.</p>'; return; }
+        div.innerHTML = posts.map(f => {
+          const title = f.name.replace('.html','').replace(/-/g,' ');
+          return `<div class="post"><a href="tests/${f.name}">${title}</a></div>`;
+        }).join('');
+      });
+  </script>
 </body>
 </html>
